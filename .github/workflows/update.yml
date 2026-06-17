@@ -1,0 +1,44 @@
+name: Update Dashboard
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+
+      - name: Python 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 라이브러리 설치
+        run: pip install requests
+
+      - name: 조달청 데이터 수집
+        run: python g2b_accumulator.py
+        env:
+          G2B_KEY: ${{ secrets.G2B_KEY }}
+
+      - name: 대시보드 생성
+        run: python build_dashboard.py
+
+      - name: 변경사항 저장
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+
+          git add .
+
+          git diff --cached --quiet || git commit -m "자동 업데이트"
+
+          git push
