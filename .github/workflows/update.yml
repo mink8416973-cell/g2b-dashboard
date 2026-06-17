@@ -30,7 +30,7 @@ jobs:
           G2B_KEY: ${{ secrets.G2B_KEY }}
 
       - name: 대시보드 생성
-        run: python build_dashboard.py
+        run: python build_dashboard.py master_납품요구.csv index.html
 
       - name: 변경사항 저장
         run: |
