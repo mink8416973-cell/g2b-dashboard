@@ -22,7 +22,7 @@ SERVICE_KEY = os.environ.get("G2B_KEY") or "여기에_본인_디코딩_인증키
 ENDPOINT = "https://apis.data.go.kr/1230000/at/ShoppingMallPrdctInfoService/getDlvrReqDtlInfoList"
 
 MASTER_CSV = "master_납품요구.csv"     # 누적 마스터 (이어받기 기준)
-START_DATE = dt.date(2020, 1, 1)      # 백필 시작일
+START_DATE = dt.date(2025, 1, 1)      # 백필 시작일
 NUM_OF_ROWS = 100                     # 페이지당 행 수
 SLEEP_SEC = 0.2                       # 호출 간 대기
 MAX_RETRY = 3
